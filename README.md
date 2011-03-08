@@ -136,6 +136,6 @@ So far only one error is handled, 404.  If you want to extend this, it is very e
 
     // Add a custom handler for Forbidden
     restMVC.ErrorMapper['Forbidden'] = function(error, request, response){
-        response.send('<!DOCTYPE html><html><head><title>Forbidden</title></head><body><h2>Forbidden</h2></body></html>', 404);
+        response.send('<!DOCTYPE html><html><head><title>Forbidden</title></head><body><h2>Forbidden</h2></body></html>', 403);
         }
     }

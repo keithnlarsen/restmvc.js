@@ -41,7 +41,15 @@ Your controllers must be implemented in a specific way such as:
         //});
     };
 
-From this basic framework a controller that implements get(id), list(), insert(json), update(id, json), remove(id).  You may also add your own customer methods.
+From this basic framework a controller that implements:
+
+  * get(id)
+  * list(),
+  * insert(json)
+  * update(id, json)
+  * remove(id)
+
+You may also add your own customer methods.
 
 ### Models
 
@@ -93,6 +101,7 @@ Custom routes can be defined by adding something like the following to the route
 ### Dependancies
 
 So far this is dependant on:
+
   * Nodejs 0.4.1
   * Mongoose 1.0.10
   * MongoDB 1.6.5

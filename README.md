@@ -27,20 +27,19 @@ I plan to provide a tool that will eventually auto-generate a project structure 
 
 Your controllers must be implemented in a specific way such as:
 
-module.exports.personController = function(baseController, app){
+    module.exports.personController = function(baseController, app){
+        // Change the default plural name from persons to people
+        baseController.plural = 'people';
+        return baseController;
 
-    // Change the default plural name from persons to people
-    baseController.plural = 'people';
-    return baseController;
-
-//    Example of how to extend the base controller if you need to...
-//    var Controller = baseController.extend({
-//        toString: function(){
-//            // calls parent "toString" method without arguments
-//            return this._super(Controller, "toString") + this.name;
-//        }
-//    });
-};
+        //Example of how to extend the base controller if you need to...
+        //var Controller = baseController.extend({
+        //    toString: function(){
+        //        // calls parent "toString" method without arguments
+        //        return this._super(Controller, "toString") + this.name;
+        //    }
+        //});
+    };
 
 From this basic framework a controller that implements get(id), list(), insert(json), update(id, json), remove(id).  You may also add your own customer methods.
 

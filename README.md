@@ -9,7 +9,7 @@ This is the first checkin, but so far it will auto generate controllers, routes,
 
 ## Installation
 
-I plan to get this setup in NPM very soon.
+    npm install restmvc.js
 
 ## Setup
 

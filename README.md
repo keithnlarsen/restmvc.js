@@ -155,8 +155,6 @@ You can then start your sever using app.listen...
 
 ## Customize RestErrors
 
-It also binds app.error to restErrors.ErrorHandler which maps an error to an error handler so that error are automatically handled.  I've had some trouble getting rendering using views to work so I'm just using hard coded html.
-
 So far only one error is handled, 404.  If you want to extend this, it is very easy to do.  Just do something like this in your app.js file.
 
     // Add a custom rest error for Forbidden

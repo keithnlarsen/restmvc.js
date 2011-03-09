@@ -1,26 +1,27 @@
 RestMVC
 =======
 
-The goal of RestMVC is to  provide a simple framework that help you to write a RESTful webservice useing Nodejs, Express, Mongoose, and MongoDB.  It's goal is to take out the repetitive crap everyone hates doing, while staying out of your ways as much as possible and letting you do things how you want to.
+The goal of RestMVC is to  provide a simple framework that helps you to write a RESTful webservice using NodeJs, Express, Mongoose, and MongoDB.  It's goal is to take out the repetitive crap everyone hates doing, while staying out of your ways as much as possible and letting you do things how you want to.
 
 ## Contribute
 
-This project is just begining, it arose from my attempts to create a RESTfull service and discovering that I wasn't as easy to do as I would have like.  But I'd really appreciate any contributions, bug reports, advice, or suggestions for improvement.
+This project is just begining, it arose from my attempts to create a RESTfull service and discovering that it wasn't as easy as I would have liked.  I'd really appreciate any contributions, bug reports, advice, or suggestions for improvement.
 
 ## Features
 
-This is the first release, but so far give a mongoose model object it will:
+This is the first release, but so far given a mongoose model object it will:
 
  * Auto-generate controllers
  * Auto-generate routes
- * Handle NotFound and 500 errors in a nice clean way.
+ * Handle 'NotFound' and '500' errors in a nice clean way.
 
 Planned in the near future:
 
- * Security
- * More complex List actions on the controller
- * Tool that auto-generates a template project for you
-
+ * Security.
+ * More complex List actions on the controller.
+ * Tool that auto-generates a template project for you.
+ * More error types.
+ 
 ## Installation
 
     npm install restmvc.js
@@ -41,16 +42,18 @@ So far this is dependant on:
 I plan to provide a tool that will eventually auto-generate a project structure for you, but for now, you have to lay it out as follows.
 
     /controllers
-    /controllers/person.js
+    /controllers/{entity_name}.js
     /models
-    /models/person.js
+    /models/{entity_name}.js
     /routes
-    /routes/person.js
+    /routes/{entity_name}.js
     app.js
 
-### Models
+### Creating a Model
 
-Models are just default Mongoose models, an example of how you'd define one is like the following:
+Models are just standard Mongoose models, you can create a new model by creating a javascript file inside of the 'models' folder.  You need to name the file, and the export the same.  Your object will get a Mongoose object passed to it, you use that to create your model.
+
+Here's an example of how you'd define one:
 
     exports.person = function (mongoose) {
         var Schema = mongoose.Schema;
@@ -69,11 +72,16 @@ Models are just default Mongoose models, an example of how you'd define one is l
         return mongoose.model('Person');
     };
 
-### Controllers
+### Creating a Controller
 
-To create the simplest controller that gives you the default get, list, insert, update, and remove all you have to do is:
+You don't have to do anything to create a basic controller, one that provides get, list, insert, update, and remove is generated for you.  However if you wanted to extend or change the base controller, you'd create a file inside of the 'controllers' folder and name it the same as your model file.  The file should export an object named {entity_name}Controller, for example personController.
+
+Here's an example of how you'd define one:
 
     module.exports.personController = function(baseController, restMvc){
+        // By default pluralization are done by adding 's'
+        // you can change the default plural name from persons to people like so
+        baseController.plural = 'people';
         return baseController;
     }
 
@@ -88,18 +96,18 @@ From this basic framework a controller that implements:
 You can extend the base functionality by defining your controller something like this:
 
     module.exports.personController = function(baseController, restMvc){
-        // Change the default plural name from persons to people
+        // Change the default plural name from 'persons' to 'people'
         baseController.plural = 'people';
 
         //Example of how to extend the base controller if you need to...
-        var controller = baseController.extend({
+        var extendedController = baseController.extend({
             toString: function(){
                 // calls parent "toString" method without arguments
-                return this._super(Controller, "toString") + this.name;
+                return this._super(extendedController, "toString") + this.name;
             }
         });
 
-        return controller;
+        return extendedController;
     };
 
 ### Routes
@@ -177,11 +185,11 @@ So far only one error is handled, 404.  If you want to extend this, it is very e
 
 RestMVC make all the models, controllers, and RestErrors junk available to you via the following:
 
-  * restMVC.Models[] - all your models are available here.
-  * restMVC.Controllers[] - all your controllers are available here.
+  * restMVC.Models[] - all your models are available here by name, such as: var personModel = restMVC.Models['person'];
+  * restMVC.Controllers[] - all your controllers are available here by name, such as: var personController = restMVC.Controllers['person'];
   * restMVC.RestError - the RestError infrastructure is available to you here for customization.
   * restMVC.ErrorMapper - this defines what the error handler does when it gets passed a particular error.
-  * restMVC.ErrorHandler - this is used by the Express app to handle the errors, actually you have to set this mapping up, I'll describe it below.
-  * restMVC.Initialize(app, mongoose) - This is what kicks off the everything, called by you in your app.js file.
+  * restMVC.ErrorHandler - this is used by the Express app to handle the errors, actually you have to wire this up by doing: app.error(restMVC.ErrorHandler);
+  * restMVC.Initialize(app, mongoose) - This is what kicks off everything, called by you in your app.js file.
   * restMVC.BaseController - This is the base controller that all others are created from, exposed for testing purposes.
   * restMVC.RegisterRoutes(app, controller) - Registers the default routes for the default controller, exposed for testing purposes.

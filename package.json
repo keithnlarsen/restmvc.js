@@ -1,0 +1,17 @@
+{
+  "name": "restmvc.js",
+  "description": "A micro framework that helps you quickly build RESTful web services",
+  "version": "0.0.2",
+  "homepage": "http://github.com/keithnlarsen/restmvc.js",
+  "author": "Keith Larsen",
+  "main": "./index.js",
+  "engines": {
+    "node": ">= 0.4.1"
+  },
+  "dependencies": {
+    "jake": "0.1.8",
+    "nodeunit": "0.5.0",
+    "express": "2.0.0beta2",
+    "mongoose": "1.0.10"
+  }
+}

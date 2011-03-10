@@ -1,5 +1,5 @@
 var sys = require('sys');
-var express = require('express@2.0.0beta2');
+var express = require('express@2.0.0beta3');
 var app = module.exports = express.createServer();
 
 var mongoose = require('mongoose@1.0.10');
@@ -11,7 +11,7 @@ app.configure('debug', function() {
 
 app.configure(function() {
     app.set('root', __dirname);
-
+    app.set('views', __dirname + '/views');
     app.use(express.favicon());
     app.use(express.bodyParser());
     app.use(express.methodOverride());
@@ -25,7 +25,17 @@ restMVC.Initialize(app, mongoose);
 app.error(restMVC.ErrorHandler);
 
 app.use(function(req, res, next){
-  next(new NotFound(req.url));
+  next(restMVC.RestError.NotFound.create(req.url));
+});
+
+// example of how to throw a 404
+app.get('/404', function(req, res, next){
+  next(restMVC.RestError.NotFound.create(req.url));
+});
+
+// example of how to throw a 500
+app.get('/500', function(req, res, next){
+  next(new Error('keyboard cat!'));
 });
 
 if (!module.parent) {

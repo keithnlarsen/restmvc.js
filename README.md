@@ -174,19 +174,19 @@ You can then start your sever using app.listen...
 So far only one error is handled, 404.  If you want to extend this, it is very easy to do.  Just do something like this in your app.js file.
 
     // Add a custom rest error for Forbidden
-    restMVC.RestError.Forbidden = function (msg) {
-        this.name = 'Forbidden';
-        this.message = msg;
-        Error.call(this, msg);
-        Error.captureStackTrace(this, arguments.callee);
-    }
-
-    sys.inherits(restMVC.RestError.Forbidden, Error);
+    restMVC.RestError.Forbidden = restMVC.RestError.BaseRestError.extend({
+        name: 'Forbidden',
+        title: 'Forbidden',
+        description: 'Access denied.',
+        httpStatus: 403
+    })
 
     // Add a custom handler for Forbidden
     restMVC.ErrorMapper['Forbidden'] = function(error, request, response){
-            response.send('<!DOCTYPE html><html><head><title>Forbidden</title></head><body><h2>Forbidden</h2></body></html>', 403);
-        }
+        response.render('resterror.jade', {
+            status: error.httpStatus,
+            error: error
+        });
     }
 
 ## API
@@ -196,8 +196,21 @@ RestMVC make all the models, controllers, and RestErrors junk available to you v
   * restMVC.Models[] - all your models are available here by name, such as: var personModel = restMVC.Models['person'];
   * restMVC.Controllers[] - all your controllers are available here by name, such as: var personController = restMVC.Controllers['person'];
   * restMVC.RestError - the RestError infrastructure is available to you here for customization.
+  * restMVC.BaseRestError - use this to extend the default error handling and create new types of RestErrors (based of standard http status codes of course)
   * restMVC.ErrorMapper - this defines what the error handler does when it gets passed a particular error.
   * restMVC.ErrorHandler - this is used by the Express app to handle the errors, actually you have to wire this up by doing: app.error(restMVC.ErrorHandler);
   * restMVC.Initialize(app, mongoose) - This is what kicks off everything, called by you in your app.js file.
   * restMVC.BaseController - This is the base controller that all others are created from, exposed for testing purposes.
   * restMVC.RegisterRoutes(app, controller) - Registers the default routes for the default controller, exposed for testing purposes.
+
+## License
+
+(The MIT License)
+
+Copyright (c) 2011 Keith Larsen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

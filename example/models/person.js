@@ -1,17 +1,15 @@
-exports.person = function (mongoose) {
+module.exports.person = function (mongoose) {
     // Standard Mongoose stuff here...
-    var Schema = mongoose.Schema;
-    var ObjectId = Schema.ObjectId;
+    var schema = mongoose.Schema;
+    var objectId = schema.ObjectId;
 
-    var Person = new Schema({
-        _id: ObjectId,
+    mongoose.model('Person', new schema({
+        _id: objectId,
         firstName: String,
         lastName: String,
         initial: String,
         dateOfBirth: Date
-    });
-
-    mongoose.model('Person', Person);
+    }));
 
     return mongoose.model('Person');
 };

@@ -5,7 +5,7 @@ var newPersonId = '';
 var http = require('http');
 var TestFixture = require('nodeunit').testCase;
 
-exports['HTTP Method'] = TestFixture({
+module.exports['HTTP Method'] = TestFixture({
     setUp: function (callBack) {
 
         this.localhost = http.createClient(3000, 'localhost');

@@ -19,7 +19,7 @@ Planned in the near future:
 
  * Security.
  * More complex List actions on the controller.
- * Tool that auto-generates a template project for you.
+ * A tool that auto-generates a template project for you.
  * More error types.
  
 ## Installation
@@ -36,6 +36,16 @@ So far this is dependant on:
   * Express 2.0beta2
   * NodeUnit 0.5.0
   * Node-Jake
+
+## Example
+
+I've created an example project in the example folder.  If you download the complete RestMVC.js project and from the command line navigate into the example folder, you can run a set of integration tests by typing:
+
+    jake test
+
+You can also start up the the REST service by typing:
+
+    jake debug
 
 ## Setup
 
@@ -56,18 +66,16 @@ Models are just standard Mongoose models, you can create a new model by creating
 Here's an example of how you'd define one:
 
     exports.person = function (mongoose) {
-        var Schema = mongoose.Schema;
-        var ObjectId = Schema.ObjectId;
+        var schema = mongoose.Schema;
+        var objectId = schema.ObjectId;
 
-        var Person = new Schema({
-            _id: ObjectId,
+        mongoose.model('Person', new schema({
+            _id: objectId,
             firstName: String,
             lastName: String,
             initial: String,
             dateOfBirth: Date
-        });
-
-        mongoose.model('Person', Person);
+        }));
 
         return mongoose.model('Person');
     };

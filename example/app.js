@@ -12,6 +12,7 @@ app.configure('debug', function() {
 app.configure(function() {
     app.set('root', __dirname);
     app.set('views', __dirname + '/views');
+    app.set('view engine', 'jade');
     app.use(express.favicon());
     app.use(express.bodyParser());
     app.use(express.methodOverride());

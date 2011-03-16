@@ -62,7 +62,7 @@ module.exports['HTTP Method'] = TestFixture({
     'GET Should return a single Person when calling /People/{ID}' : function(test){
         test.expect(3);
 
-        var request = this.localhost.request('GET', '/People/' + newPersonId, {'Host': 'localhost', 'Accept': 'application/json'});
+        var request = this.localhost.request('GET', '/People/' + newPersonId + '.json', {'Host': 'localhost', 'Accept': 'application/json'});
 
         this.requestHelper(request, function(response){
             var actualPerson = JSON.parse(response.body);
@@ -113,7 +113,7 @@ module.exports['HTTP Method'] = TestFixture({
     'GET Should return all people when calling /People/' : function(test){
         test.expect(2);
 
-        var request = this.localhost.request('GET', '/People/', {'Host': 'localhost', 'Accept': 'application/json'});
+        var request = this.localhost.request('GET', '/People.json', {'Host': 'localhost', 'Accept': 'application/json'});
 
         this.requestHelper(request, function(response){
             test.equals(response.statusCode, 200);
@@ -125,7 +125,7 @@ module.exports['HTTP Method'] = TestFixture({
     'GET Should return a 404 when calling /People/{ID} with an ID that doesn\'t exist' : function(test){
         test.expect(2);
 
-        var request = this.localhost.request('GET', '/People/XXXXX', {'Host': 'localhost', 'Accept': 'application/json'});
+        var request = this.localhost.request('GET', '/People/XXXXX.json', {'Host': 'localhost', 'Accept': 'application/json'});
 
         this.requestHelper(request, function(response){
             test.ok(response.body.length > 0);

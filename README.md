@@ -30,10 +30,10 @@ Planned in the near future:
 
 So far this is dependant on:
 
-  * Nodejs 0.4.1
+  * Nodejs 0.4.2
   * Mongoose 1.0.10
   * MongoDB 1.6.5
-  * Express 2.0beta2
+  * Express 2.0beta3
   * NodeUnit 0.5.0
   * Node-Jake
 
@@ -122,8 +122,8 @@ You can extend the base functionality by defining your controller something like
 
 The default routes that get added to your express app are:
 
-  * GET /{entity_plural_name}/ - Lists all people in the database
-  * GET /{entity_plural_name}/{id} - Gets a specific person
+  * GET /{entity_plural_name}/ - Lists all entities in the colleciton
+  * GET /{entity_plural_name}/{id} - Gets a specific entity
   * PUT /{entity_plural_name}/ JSON - Inserts a new record using the json passed in
   * POST /{entity_plural_name}/{id} JSON - Updates a record using the json passed in
   * DELETE /{entity_plural_name}/{id} - Deletes the specified record
@@ -137,7 +137,7 @@ You don't need to define a route at all as they are setup for you, but if you wa
                 if (err)
                     next(new Error('Internal Server Error: see logs for details: ' +  err), request, response);
                 else if (!instance)
-                    next(new restMvc.RestError.NotFound('Employee Id: "' + request.params.id + '" was not found.'), request, response);
+                    next(restMvc.RestError.NotFound.create('Employee Id: "' + request.params.id + '" was not found.'), request, response);
                 else
                     response.send(instance.toObject());
             });
@@ -148,8 +148,8 @@ You don't need to define a route at all as they are setup for you, but if you wa
 
 In your app.js file after connecting to mongoose and defining your express app, you should initialize everything like so:
 
-    var express = require('express@2.0.0beta2');
-    var restMVC = require('restmvc@0.0.2');
+    var express = require('express@2.0.0beta3');
+    var restMVC = require('restmvc@0.0.3');
     var mongoose = require('mongoose@1.0.10');
 
     var app = module.exports = express.createServer();

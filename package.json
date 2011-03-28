@@ -5,6 +5,7 @@
   "homepage": "http://github.com/keithnlarsen/restmvc.js",
   "author": "Keith Larsen",
   "main": "./index.js",
+  "directories": {"lib": "./lib"},
   "engines": {
     "node": ">= 0.4.1"
   },
@@ -14,5 +15,8 @@
     "express": "2.0.0beta3",
     "mongoose": "1.0.10",
     "jade": "0.8.5"
+  },
+  "bin": {
+    "restmvc": "./bin/restmvc"
   }
 }

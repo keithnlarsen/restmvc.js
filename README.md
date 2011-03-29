@@ -30,15 +30,12 @@ Planned in the near future:
 
 So far this is dependant on:
 
-  * Nodejs 0.4.2
+  * Nodejs 0.4.1 >=
   * Mongoose 1.0.10
   * MongoDB 1.6.5
-  * Express 2.0beta3
+  * Express 2.1.0
   * NodeUnit 0.5.0
   * Node-Jake
-
-## Generate a new Project
-
 
 ## Example
 

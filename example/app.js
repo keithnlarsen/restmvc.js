@@ -1,5 +1,5 @@
 var sys = require('sys');
-var express = require('express@2.0.0beta3');
+var express = require('express@2.1.0');
 var app = module.exports = express.createServer();
 
 var mongoose = require('mongoose@1.0.10');

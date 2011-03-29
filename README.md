@@ -5,7 +5,7 @@ The goal of RestMVC is to  provide a simple framework that helps you to write a 
 
 ## Contribute
 
-This project is just begining, it arose from my attempts to create a RESTfull service and discovering that it wasn't as easy as I would have liked.  I'd really appreciate any contributions, bug reports, advice, or suggestions for improvement.
+This project is just begining, it arose from my attempts to create a RESTful service and discovering that it wasn't as easy as I would have liked.  I'd really appreciate any contributions, bug reports, advice, or suggestions for improvement.
 
 ## Features
 
@@ -37,6 +37,9 @@ So far this is dependant on:
   * NodeUnit 0.5.0
   * Node-Jake
 
+## Generate a new Project
+
+
 ## Example
 
 I've created an example project in the example folder.  If you download the complete RestMVC.js project and from the command line navigate into the example folder, you can run a set of integration tests by typing:
@@ -49,7 +52,11 @@ You can also start up the the REST service by typing:
 
 ## Setup
 
-I plan to provide a tool that will eventually auto-generate a project structure for you, but for now, you have to lay it out as follows.
+A tool is provided to auto-generate a project structure for you.  You can use it by executing the following:
+
+    restmvc app hello
+
+It will generate a project structure for you like this:
 
     /controllers
     /controllers/{entity_name}.js
@@ -122,11 +129,11 @@ You can extend the base functionality by defining your controller something like
 
 The default routes that get added to your express app are:
 
-  * GET /{entity_plural_name}/ - Lists all entities in the colleciton
-  * GET /{entity_plural_name}/{id} - Gets a specific entity
-  * PUT /{entity_plural_name}/ JSON - Inserts a new record using the json passed in
-  * POST /{entity_plural_name}/{id} JSON - Updates a record using the json passed in
-  * DELETE /{entity_plural_name}/{id} - Deletes the specified record
+  * GET     /{entity_plural_name}/              - Lists all entities in the colleciton
+  * GET     /{entity_plural_name}/{id}          - Gets a specific entity
+  * PUT     /{entity_plural_name}/ JSON         - Inserts a new record using the json passed in
+  * POST    /{entity_plural_name}/{id} JSON     - Updates a record using the json passed in
+  * DELETE  /{entity_plural_name}/{id}          - Deletes the specified record
 
 You don't need to define a route at all as they are setup for you, but if you want to extend the defaults by defining routes for your entity type, it would look something like the following:
 
@@ -148,8 +155,8 @@ You don't need to define a route at all as they are setup for you, but if you wa
 
 In your app.js file after connecting to mongoose and defining your express app, you should initialize everything like so:
 
-    var express = require('express@2.0.0beta3');
-    var restMVC = require('restmvc@0.0.3');
+    var express = require('express@2.1.0');
+    var restMVC = require('restmvc@0.0.4');
     var mongoose = require('mongoose@1.0.10');
 
     var app = module.exports = express.createServer();
@@ -202,6 +209,11 @@ RestMVC make all the models, controllers, and RestErrors junk available to you v
   * restMVC.Initialize(app, mongoose) - This is what kicks off everything, called by you in your app.js file.
   * restMVC.BaseController - This is the base controller that all others are created from, exposed for testing purposes.
   * restMVC.RegisterRoutes(app, controller) - Registers the default routes for the default controller, exposed for testing purposes.
+
+## Credits
+
+- Keith Larsen - [keithnlarsen](http://github.com/keithnlarsen)
+- Alberto Pose - [pose](http://github.com/pose)
 
 ## License
 

@@ -10,6 +10,7 @@ This project is just begining, it arose from my attempts to create a RESTful ser
 ## Features
 
 This is the first release, but so far given a mongoose model object it will:
+
  * Tool to build project skelleton for you
  * Tool to build empty models for you
  * Auto-generate controllers
@@ -160,7 +161,7 @@ You don't need to define a route at all as they are setup for you, but if you wa
 In your app.js file after connecting to mongoose and defining your express app, you should initialize everything like so:
 
     var express = require('express@2.1.0');
-    var restMVC = require('restmvc@0.0.4');
+    var restMVC = require('restmvc.js');
     var mongoose = require('mongoose@1.0.10');
 
     var app = module.exports = express.createServer();

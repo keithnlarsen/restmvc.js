@@ -59,7 +59,7 @@ module.exports['HTTP Method'] = TestFixture({
         });
     },
 
-    'GET Should return a single Person when calling /People/{ID}' : function(test){
+    'GET Should return a single Person when calling /People/{ID}.json' : function(test){
         test.expect(3);
 
         var request = this.localhost.request('GET', '/People/' + newPersonId + '.json', {'Host': 'localhost', 'Accept': 'application/json'});
@@ -73,6 +73,17 @@ module.exports['HTTP Method'] = TestFixture({
 //            test.equals(expectedPerson.dateOfBirth, actualPerson.dateOfBirth);
 
             test.equals(response.statusCode, 200);
+            test.done();
+        });
+    },
+
+    'GET Should get a Bad Request when calling /People/{ID}.xml' : function(test){
+        test.expect(1);
+
+        var request = this.localhost.request('GET', '/People/' + newPersonId + '.xml', {'Host': 'localhost', 'Accept': 'application/json'});
+
+        this.requestHelper(request, function(response){
+            test.equals(response.statusCode, 400);
             test.done();
         });
     },
@@ -110,7 +121,7 @@ module.exports['HTTP Method'] = TestFixture({
         });
     },
 
-    'GET Should return all people when calling /People/' : function(test){
+    'GET Should return all people when calling /People.json' : function(test){
         test.expect(2);
 
         var request = this.localhost.request('GET', '/People.json', {'Host': 'localhost', 'Accept': 'application/json'});

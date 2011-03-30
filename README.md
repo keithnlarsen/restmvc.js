@@ -10,16 +10,18 @@ This project is just begining, it arose from my attempts to create a RESTful ser
 ## Features
 
 This is the first release, but so far given a mongoose model object it will:
-
+ * Tool to build project skelleton for you
+ * Tool to build empty models for you
  * Auto-generate controllers
  * Auto-generate routes
- * Handle 'NotFound' and '500' errors in a nice clean way.
+ * Handle 'BadRequest', 'NotFound' and '500' errors in a nice clean way.
 
 Planned in the near future:
 
  * Security.
  * More complex List actions on the controller.
- * A tool that auto-generates a template project for you.
+ * Filters
+ * Accept header based response rendering
  * More error types.
  
 ## Installation
@@ -36,6 +38,7 @@ So far this is dependant on:
   * Express 2.1.0
   * NodeUnit 0.5.0
   * Node-Jake
+  * EJS 0.3.1
 
 ## Example
 
@@ -66,6 +69,10 @@ It will generate a project structure for you like this:
 ### Creating a Model
 
 Models are just standard Mongoose models, you can create a new model by creating a javascript file inside of the 'models' folder.  You need to name the file, and the export the same.  Your object will get a Mongoose object passed to it, you use that to create your model.
+
+You can create an empty model by typing the following from the root of the project:
+
+    restmvc model {entity_name}
 
 Here's an example of how you'd define one:
 
@@ -175,7 +182,7 @@ You can then start your sever using app.listen...
 
 ## Customize RestErrors
 
-So far only one error is handled, 404.  If you want to extend this, it is very easy to do.  Just do something like this in your app.js file.
+So far only two errors are handled, 400 and 404.  If you want to extend this, it is very easy to do.  Just do something like this in your app.js file.
 
     // Add a custom rest error for Forbidden
     restMVC.RestError.Forbidden = restMVC.RestError.BaseRestError.extend({
@@ -184,6 +191,8 @@ So far only one error is handled, 404.  If you want to extend this, it is very e
         description: 'Access denied.',
         httpStatus: 403
     })
+
+You can just let the default error template generate the html response, or you can define a customer one like so:
 
     // Add a custom handler for Forbidden
     restMVC.ErrorMapper['Forbidden'] = function(error, request, response){

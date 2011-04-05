@@ -33,7 +33,7 @@ Planned in the near future:
 
 So far this is dependant on:
 
-  * Nodejs 0.4.1 >=
+  * Nodejs >= 0.4.1
   * Mongoose 1.0.10
   * MongoDB 1.6.5
   * Express 2.1.0

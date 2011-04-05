@@ -1,14 +1,31 @@
 module.exports.personRoutes = function(personController, app, restMvc){
 
-    //Example route implemtation.
-//    app.get('/people/:id', function(request, response, next) {
-//        personController.get(request.params.id, function(err, instance) {
-//            if (err)
+    //Example route implemtation. Uncomment for an example of how to implememnt a custom route.
+//    app.get('/people.:format?', function(request, response, next) {
+//
+//        console.log('Overriden list route');
+//
+//        personController.list(function(err, results) {
+//            if (err) {
 //                next(new Error('Internal Server Error: see logs for details: ' +  err), request, response);
-//            else if (!instance)
-//                next(new restMvc.RestError.NotFound('Person Id: "' + request.params.id + '" was not found.'), request, response);
-//            else
-//                response.send(instance.toObject());
+//            }
+//            else {
+//                if (request.params.format){
+//                    if (request.params.format.toLowerCase() == 'json') {
+//                        response.send(results.map(function(instance) {
+//                            return instance.toObject();
+//                        }));
+//                    }
+//                    else{
+//                        next(restMvc.RestError.BadRequest.create('The \'' + request.params.format + '\' format is not supported at this time.'), request, response);
+//                    }
+//                }
+//                else {
+//                    response.render(controller.name, { collection: results.map(function(instance) {
+//                        return instance.toObject();
+//                    })});
+//                }
+//            }
 //        });
-//    });
+//    })
 };

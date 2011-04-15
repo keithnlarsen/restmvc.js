@@ -1,0 +1,17 @@
+!!! 5
+html(lang="en")
+  head
+    title="Edit " + person.firstName + ' ' + person.lastName
+  body
+  form(method="post", action="/people/" + person._id)
+    input(type="hidden", name="_method", value="put")
+    fieldset
+      legend Name
+      p
+        label(for="person[firstName]") First Name:
+          input(type="text", name="person[firstName]", value=person.firstName)
+      p
+        label(for="person[lastName]") Last Name:
+          input(type="text", name="person[lastName]", value=person.lastName)
+    p.buttons
+      input(type="submit", value="Save")

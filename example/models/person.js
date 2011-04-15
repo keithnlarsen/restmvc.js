@@ -10,6 +10,6 @@ module.exports.person = function (mongoose) {
         initial: String,
         dateOfBirth: Date
     }));
-
+    
     return mongoose.model('Person');
 };

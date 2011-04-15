@@ -91,7 +91,7 @@ module.exports['HTTP Method'] = TestFixture({
     'PUT Should update an existing Person' : function(test){
         test.expect(3);
 
-        var request = this.localhost.request('PUT', '/People/' + newPersonId, {'Host': 'localhost', 'Accept': 'application/json', 'Content-Type': 'application/json'});
+        var request = this.localhost.request('PUT', '/People/' + newPersonId + '.json', {'Host': 'localhost', 'Accept': 'application/json', 'Content-Type': 'application/json'});
         request.write(updateJSON);
 
         this.requestHelper(request, function(response){
@@ -111,7 +111,7 @@ module.exports['HTTP Method'] = TestFixture({
     'PUT Should return 404 when trying to Update Person That Doesn\'t Exist' : function(test){
         test.expect(2);
 
-        var request = this.localhost.request('PUT', '/People/XXXXX', {'Host': 'localhost', 'Accept': 'application/json'});
+        var request = this.localhost.request('PUT', '/People/XXXXX.json', {'Host': 'localhost', 'Accept': 'application/json'});
         request.write(updateJSON);
 
         this.requestHelper(request, function(response){

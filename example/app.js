@@ -1,8 +1,8 @@
 var sys = require('sys');
-var express = require('express@2.1.0');
+var express = require('express');
 var app = module.exports = express.createServer();
 
-var mongoose = require('mongoose@1.0.10');
+var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/restmvc');
 
 app.configure('debug', function() {

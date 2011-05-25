@@ -4,7 +4,7 @@ module.exports.person = function (mongoose) {
     var objectId = schema.ObjectId;
 
     mongoose.model('Person', new schema({
-        _id: objectId,
+//        _id: objectId,
         firstName: String,
         lastName: String,
         initial: String,

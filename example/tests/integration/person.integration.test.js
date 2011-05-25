@@ -37,8 +37,6 @@ module.exports['HTTP Method'] = TestFixture({
     },
 
     'POST Should create a new Person' : function(test){
-        test.expect(4);
-
         var request = this.localhost.request('POST', '/People/', {'Host': 'localhost', 'Accept': 'application/json', 'Content-Type': 'application/json'});
         request.write(createJSON);
 
@@ -47,6 +45,7 @@ module.exports['HTTP Method'] = TestFixture({
             var expectedPerson = JSON.parse(createJSON);
 
             newPersonId = actualPerson._id;
+            //console.log(actualPerson);
 
             test.ok(newPersonId != null);
             test.equals(expectedPerson.firstName, actualPerson.firstName);
@@ -60,8 +59,6 @@ module.exports['HTTP Method'] = TestFixture({
     },
 
     'GET Should return a single Person when calling /People/{ID}.json' : function(test){
-        test.expect(3);
-
         var request = this.localhost.request('GET', '/People/' + newPersonId + '.json', {'Host': 'localhost', 'Accept': 'application/json'});
 
         this.requestHelper(request, function(response){
@@ -78,8 +75,6 @@ module.exports['HTTP Method'] = TestFixture({
     },
 
     'GET Should get a Bad Request when calling /People/{ID}.xml' : function(test){
-        test.expect(1);
-
         var request = this.localhost.request('GET', '/People/' + newPersonId + '.xml', {'Host': 'localhost', 'Accept': 'application/json'});
 
         this.requestHelper(request, function(response){
@@ -89,8 +84,6 @@ module.exports['HTTP Method'] = TestFixture({
     },
 
     'PUT Should update an existing Person' : function(test){
-        test.expect(3);
-
         var request = this.localhost.request('PUT', '/People/' + newPersonId + '.json', {'Host': 'localhost', 'Accept': 'application/json', 'Content-Type': 'application/json'});
         request.write(updateJSON);
 
@@ -109,9 +102,7 @@ module.exports['HTTP Method'] = TestFixture({
     },
 
     'PUT Should return 404 when trying to Update Person That Doesn\'t Exist' : function(test){
-        test.expect(2);
-
-        var request = this.localhost.request('PUT', '/People/XXXXX.json', {'Host': 'localhost', 'Accept': 'application/json'});
+        var request = this.localhost.request('PUT', '/People/XXXXX.json', {'Host': 'localhost', 'Accept': 'application/json', 'Content-Type': 'application/json'});
         request.write(updateJSON);
 
         this.requestHelper(request, function(response){
@@ -122,8 +113,6 @@ module.exports['HTTP Method'] = TestFixture({
     },
 
     'GET Should return all people when calling /People.json' : function(test){
-        test.expect(2);
-
         var request = this.localhost.request('GET', '/People.json', {'Host': 'localhost', 'Accept': 'application/json'});
 
         this.requestHelper(request, function(response){
@@ -134,8 +123,6 @@ module.exports['HTTP Method'] = TestFixture({
     },
 
     'GET Should return a 404 when calling /People/{ID} with an ID that doesn\'t exist' : function(test){
-        test.expect(2);
-
         var request = this.localhost.request('GET', '/People/XXXXX.json', {'Host': 'localhost', 'Accept': 'application/json'});
 
         this.requestHelper(request, function(response){
@@ -146,8 +133,6 @@ module.exports['HTTP Method'] = TestFixture({
     },
 
     'DELETE Should delete person when calling /People/{ID}' : function(test){
-        test.expect(1);
-
         var request = this.localhost.request('DELETE', '/People/' + newPersonId, {'Host': 'localhost', 'Accept': 'application/json'});
 
         this.requestHelper(request, function(response){
@@ -157,8 +142,6 @@ module.exports['HTTP Method'] = TestFixture({
     },
 
     'DELETE Should return a 404 when calling /People/{ID} with an ID that doesn\'t exist' : function(test){
-        test.expect(1);
-
         var request = this.localhost.request('DELETE', '/People/XXXXX', {'Host': 'localhost', 'Accept': 'application/json'});
 
         this.requestHelper(request, function(response){

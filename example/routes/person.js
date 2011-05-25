@@ -1,6 +1,6 @@
 module.exports.personRoutes = function(personController, app, restMvc){
 
-    //Example route implemtation. Uncomment for an example of how to implememnt a custom route.
+    //Example route implemtation. Uncomment for an example of how to implement a custom route.
 //    app.get('/people.:format?', function(request, response, next) {
 //
 //        console.log('Overriden list route');

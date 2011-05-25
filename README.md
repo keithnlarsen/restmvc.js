@@ -16,13 +16,15 @@ This is the first release, but so far given a mongoose model object it will:
  * Auto-generate controllers
  * Auto-generate routes
  * Handle 'BadRequest', 'NotFound' and '500' errors in a nice clean way.
+ * Inflection Library to translate 'person' into 'people'
+ * Accept header based response rendering
+ * List will now take '?from=1&to=10' for paging
 
 Planned in the near future:
 
  * Security.
  * More complex List actions on the controller.
  * Filters
- * Accept header based response rendering
  * More error types.
  
 ## Installation
@@ -34,9 +36,9 @@ Planned in the near future:
 So far this is dependant on:
 
   * Nodejs >= 0.4.1
-  * Mongoose 1.0.10
+  * Mongoose 1.3.6
   * MongoDB 1.6.5
-  * Express 2.1.0
+  * Express 2.3.7
   * NodeUnit 0.5.0
   * Node-Jake
   * EJS 0.3.1
@@ -79,10 +81,8 @@ Here's an example of how you'd define one:
 
     exports.person = function (mongoose) {
         var schema = mongoose.Schema;
-        var objectId = schema.ObjectId;
 
         mongoose.model('Person', new schema({
-            _id: objectId,
             firstName: String,
             lastName: String,
             initial: String,
@@ -99,16 +99,14 @@ You don't have to do anything to create a basic controller, one that provides ge
 Here's an example of how you'd define one:
 
     module.exports.personController = function(baseController, restMvc){
-        // By default pluralization are done by adding 's'
-        // you can change the default plural name from persons to people like so
-        baseController.plural = 'people';
         return baseController;
     }
 
 From this basic framework a controller that implements:
 
-  * get(id)
+  * index(id)
   * list(),
+  * list(from, to),
   * insert(json)
   * update(id, json)
   * remove(id)
@@ -116,9 +114,6 @@ From this basic framework a controller that implements:
 You can extend the base functionality by defining your controller something like this:
 
     module.exports.personController = function(baseController, restMvc){
-        // Change the default plural name from 'persons' to 'people'
-        baseController.plural = 'people';
-
         //Example of how to extend the base controller if you need to...
         var extendedController = baseController.extend({
             toString: function(){
@@ -134,11 +129,19 @@ You can extend the base functionality by defining your controller something like
 
 The default routes that get added to your express app are:
 
-  * GET     /{entity_plural_name}/              - Lists all entities in the colleciton
-  * GET     /{entity_plural_name}/{id}          - Gets a specific entity
-  * PUT     /{entity_plural_name}/ JSON         - Inserts a new record using the json passed in
-  * POST    /{entity_plural_name}/{id} JSON     - Updates a record using the json passed in
-  * DELETE  /{entity_plural_name}/{id}          - Deletes the specified record
+  * GET     /{entity_plural_name}/                    - Renders Index view of all entities in the colleciton
+  * GET     /{entity_plural_name}?from=1&to=10        - Renders Index view of all entities in specified range
+  * GET     /{entity_plural_name}/New                 - Renders New view to create a new entity
+  * GET     /{entity_plural_name}.json?from=1&to=10   - Sends a json list of all entities in specified range
+  * GET     /{entity_plural_name}.json                - Sends a json list of all entities in the colleciton
+  * GET     /{entity_plural_name}/{id}                - Renders Show view of a specified entity
+  * GET     /{entity_plural_name}/{id}.json           - Sends json representation of a specified entity
+  * GET     /{entity_plural_name}/{id}.json/{Action}  - Renders 'action' view for a specified entity
+  * PUT     /{entity_plural_name}/ FormData           - Inserts a new record using Form Data passed in
+  * PUT     /{entity_plural_name}/ JSON               - Inserts a new record using the json passed in
+  * POST    /{entity_plural_name}/{id} FormData       - Updates a record using the Form Data passed in
+  * POST    /{entity_plural_name}/{id} JSON           - Updates a record using the json passed in
+  * DELETE  /{entity_plural_name}/{id}                - Deletes the specified record
 
 You don't need to define a route at all as they are setup for you, but if you want to extend the defaults by defining routes for your entity type, it would look something like the following:
 

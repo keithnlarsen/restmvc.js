@@ -1,0 +1,12 @@
+!!! 5
+html(lang="en")
+  head
+    title="List of People"
+  body
+    h1 List of People
+    #container
+      - each person in people
+        li= person.firstName + ' ' + person.lastName + ' '
+        a(href='/people/' + person._id, title='View ' + person.firstName) View |
+        a(href='/people/' + person._id + '/edit', title='Edit ' + person.firstName) Edit
+        //link_to({controller: 'person', action: 'edit', id: 123})

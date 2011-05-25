@@ -37,7 +37,7 @@ module.exports['HTTP Method'] = TestFixture({
     },
 
     'POST Should create a new Person' : function(test){
-        var request = this.localhost.request('POST', '/People/', {'Host': 'localhost', 'Accept': 'application/json', 'Content-Type': 'application/json'});
+        var request = this.localhost.request('POST', '/People.json', {'Host': 'localhost', 'Accept': 'application/json', 'Content-Type': 'application/json'});
         request.write(createJSON);
 
         this.requestHelper(request, function(response){

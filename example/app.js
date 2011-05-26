@@ -20,18 +20,18 @@ app.configure(function() {
 });
 
 // This grabs the index.js file at the root and uses that
-var restMVC = require('../');
-restMVC.Initialize(app, mongoose);
+var restMvc = require('../');
+restMvc.Initialize(app, mongoose);
 
-app.error(restMVC.ErrorHandler);
+app.error(restMvc.ErrorHandler);
 
 app.use(function(req, res, next){
-  next(restMVC.RestError.NotFound.create(req.url));
+  next(restMvc.RestError.NotFound.create(req.url));
 });
 
 // example of how to throw a 404
 app.get('/404', function(req, res, next){
-  next(restMVC.RestError.NotFound.create(req.url));
+  next(restMvc.RestError.NotFound.create(req.url));
 });
 
 // example of how to throw a 500

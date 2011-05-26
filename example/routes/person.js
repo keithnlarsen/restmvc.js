@@ -5,7 +5,7 @@ module.exports.personRoutes = function(personController, app, restMvc){
 //
 //        console.log('Overriden list route');
 //
-//        personController.list(function(err, results) {
+//        personController.index(function(err, results) {
 //            if (err) {
 //                next(new Error('Internal Server Error: see logs for details: ' +  err), request, response);
 //            }

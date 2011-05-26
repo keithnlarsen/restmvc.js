@@ -102,7 +102,7 @@ Here's an example of how you'd define one:
         return baseController;
     }
 
-From this basic framework a controller that implements:
+From this basic framework a controller is dynamically built for each model object that implements:
 
   * index(id)
   * list(),

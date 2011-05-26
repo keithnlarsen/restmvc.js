@@ -5,7 +5,7 @@ The goal of RestMVC is to  provide a simple framework that helps you to write a 
 
 ## Contribute
 
-This project is just begining, it arose from my attempts to create a RESTful service and discovering that it wasn't as easy as I would have liked.  I'd really appreciate any contributions, bug reports, advice, or suggestions for improvement.
+This project is just begining, it arose from my attempts to create a RESTful service and discovering that it wasn't as easy as I would have liked.  Lately it seems this is evolving into Nodejs on Rails... not that I think I could possibly take on that daunting task.  I'd really appreciate any contributions, bug reports, advice, or suggestions for improvement.
 
 ## Features
 
@@ -94,7 +94,7 @@ Here's an example of how you'd define one:
 
 ### Creating a Controller
 
-You don't have to do anything to create a basic controller, one that provides get, list, insert, update, and remove is generated for you.  However if you wanted to extend or change the base controller, you'd create a file inside of the 'controllers' folder and name it the same as your model file.  The file should export an object named {entity_name}Controller, for example personController.
+You don't have to do anything to create a basic controller, one that provides show, index, insert, update, and destory is reflectively created for you at runtime.  However if you wanted to extend or change the base controller, you'd create a file inside of the 'controllers' folder and name it the same as your model file.  The file should export an object named {entity_name}Controller, for example personController.
 
 Here's an example of how you'd define one:
 
@@ -104,9 +104,9 @@ Here's an example of how you'd define one:
 
 From this basic framework a controller is dynamically built for each model object that implements:
 
-  * index(id)
-  * list(),
-  * list(from, to),
+  * show(id)
+  * index(),
+  * index(start, limit),
   * insert(json)
   * update(id, json)
   * remove(id)
@@ -115,33 +115,33 @@ You can extend the base functionality by defining your controller something like
 
     module.exports.personController = function(baseController, restMvc){
         //Example of how to extend the base controller if you need to...
-        var extendedController = baseController.extend({
+        var personController = baseController.extend({
             toString: function(){
                 // calls parent "toString" method without arguments
                 return this._super(extendedController, "toString") + this.name;
             }
         });
 
-        return extendedController;
+        return personController;
     };
 
 ### Routes
 
 The default routes that get added to your express app are:
 
-  * GET     /{entity_plural_name}/                    - Renders Index view of all entities in the colleciton
-  * GET     /{entity_plural_name}?from=1&to=10        - Renders Index view of all entities in specified range
-  * GET     /{entity_plural_name}/New                 - Renders New view to create a new entity
-  * GET     /{entity_plural_name}.json?from=1&to=10   - Sends a json list of all entities in specified range
-  * GET     /{entity_plural_name}.json                - Sends a json list of all entities in the colleciton
-  * GET     /{entity_plural_name}/{id}                - Renders Show view of a specified entity
-  * GET     /{entity_plural_name}/{id}.json           - Sends json representation of a specified entity
-  * GET     /{entity_plural_name}/{id}.json/{Action}  - Renders 'action' view for a specified entity
-  * PUT     /{entity_plural_name}/ FormData           - Inserts a new record using Form Data passed in
-  * PUT     /{entity_plural_name}/ JSON               - Inserts a new record using the json passed in
-  * POST    /{entity_plural_name}/{id} FormData       - Updates a record using the Form Data passed in
-  * POST    /{entity_plural_name}/{id} JSON           - Updates a record using the json passed in
-  * DELETE  /{entity_plural_name}/{id}                - Deletes the specified record
+  * GET     /{entity_plural_name}/                      - Renders Index view of all entities in the colleciton
+  * GET     /{entity_plural_name}?start=1&limit=10      - Renders Index view of all entities in specified range
+  * GET     /{entity_plural_name}/New                   - Renders New view to create a new entity
+  * GET     /{entity_plural_name}.json?start=1&limit=10 - Sends a json list of all entities in specified range
+  * GET     /{entity_plural_name}.json                  - Sends a json list of all entities in the colleciton
+  * GET     /{entity_plural_name}/{id}                  - Renders Show view of a specified entity
+  * GET     /{entity_plural_name}/{id}.json             - Sends json representation of a specified entity
+  * GET     /{entity_plural_name}/{id}.json/{Action}    - Renders a view by the name of the {Action} for the specified entity
+  * PUT     /{entity_plural_name}/ {FormData}           - Inserts a new record using {FormData} passed in
+  * PUT     /{entity_plural_name}/ {JSON}               - Inserts a new record using the {JSON} passed in
+  * POST    /{entity_plural_name}/{id} {FormData}       - Updates a record using the {FormData} passed in
+  * POST    /{entity_plural_name}/{id} {JSON}           - Updates a record using the {JSON} passed in
+  * DELETE  /{entity_plural_name}/{id}                  - Deletes the specified record
 
 You don't need to define a route at all as they are setup for you, but if you want to extend the defaults by defining routes for your entity type, it would look something like the following:
 
@@ -163,9 +163,9 @@ You don't need to define a route at all as they are setup for you, but if you wa
 
 In your app.js file after connecting to mongoose and defining your express app, you should initialize everything like so:
 
-    var express = require('express@2.1.0');
+    var express = require('express');
     var restMVC = require('restmvc.js');
-    var mongoose = require('mongoose@1.0.10');
+    var mongoose = require('mongoose');
 
     var app = module.exports = express.createServer();
 

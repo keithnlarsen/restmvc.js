@@ -223,6 +223,7 @@ RestMVC make all the models, controllers, and RestErrors junk available to you v
 ## Credits
 
 - Keith Larsen - [keithnlarsen](http://github.com/keithnlarsen)
+- Michael Raczynski [michaelraz](http://github.com/michaelraz)
 - Alberto Pose - [pose](http://github.com/pose)
 
 ## License

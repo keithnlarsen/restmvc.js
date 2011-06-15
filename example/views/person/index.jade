@@ -9,6 +9,8 @@ html(lang="en")
         li= person.firstName + ' ' + person.lastName + ' '
         a(href='/people/' + person._id, title='View ' + person.firstName) View | 
         a(href='/people/' + person._id + '/edit', title='Edit ' + person.firstName) Edit
-        //link_to({controller: 'person', action: 'edit', id: 123})
+        form(method='post', action='/people/' + person._id)
+          input(type='hidden', name='_method', value='delete')
+          input(type='submit', value='delete')
         
     div pager.from

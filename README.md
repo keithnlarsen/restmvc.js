@@ -1,4 +1,4 @@
-RestMVC
+Originally forked from RestMVC
 =======
 
 The goal of RestMVC is to  provide a simple framework that helps you to write a RESTful webservice using NodeJs, Express, Mongoose, and MongoDB.  It's goal is to take out the repetitive crap everyone hates doing, while staying out of your ways as much as possible and letting you do things how you want to.

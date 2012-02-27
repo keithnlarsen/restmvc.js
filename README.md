@@ -1,3 +1,10 @@
+Originally forked from RestMVC
+=======
+
+This fork attempts to update this lib to use latest versions of dependencies. For full info, please got to the original: https://github.com/keithnlarsen/restmvc.js
+I've published this on NPM so if you used `npm install restmvc` this is the fork you're using.
+
+
 RestMVC
 =======
 

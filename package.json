@@ -1,5 +1,5 @@
 {
-  "name": "rested.js",
+  "name": "restmvc",
   "description": "A micro framework that helps you quickly build RESTful web services",
   "version": "0.1.1",
   "homepage": "https://github.com/IlskenLabs/restmvc/",

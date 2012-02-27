@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require('restmvc.js').cli(process.argv.slice(2));
+require('restmvc').cli(process.argv.slice(2));

@@ -2,8 +2,8 @@
   "name": "rested.js",
   "description": "A micro framework that helps you quickly build RESTful web services",
   "version": "0.1.1",
-  "homepage": "https://github.com/bskrypnyk/rested.js",
-  "author": "Bill Skrypnyk",
+  "homepage": "https://github.com/IlskenLabs/restmvc/",
+  "author": "Keith Larsen",
   "main": "./index.js",
   "directories": {"lib": "./lib"},
   "engines": {

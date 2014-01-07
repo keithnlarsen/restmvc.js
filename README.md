@@ -137,10 +137,10 @@ The default routes that get added to your express app are:
   * GET     /{entity_plural_name}/{id}                  - Renders Show view of a specified entity
   * GET     /{entity_plural_name}/{id}.json             - Sends json representation of a specified entity
   * GET     /{entity_plural_name}/{id}.json/{Action}    - Renders a view by the name of the {Action} for the specified entity
-  * PUT     /{entity_plural_name}/ {FormData}           - Inserts a new record using {FormData} passed in
-  * PUT     /{entity_plural_name}/ {JSON}               - Inserts a new record using the {JSON} passed in
-  * POST    /{entity_plural_name}/{id} {FormData}       - Updates a record using the {FormData} passed in
-  * POST    /{entity_plural_name}/{id} {JSON}           - Updates a record using the {JSON} passed in
+  * POST    /{entity_plural_name}/ {FormData}           - Inserts a new record using {FormData} passed in
+  * POST    /{entity_plural_name}/ {JSON}               - Inserts a new record using the {JSON} passed in
+  * PUT     /{entity_plural_name}/{id} {FormData}       - Updates a record using the {FormData} passed in
+  * PUT     /{entity_plural_name}/{id} {JSON}           - Updates a record using the {JSON} passed in
   * DELETE  /{entity_plural_name}/{id}                  - Deletes the specified record
 
 You don't need to define a route at all as they are setup for you, but if you want to extend the defaults by defining routes for your entity type, it would look something like the following:
